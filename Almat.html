@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Алмат</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .timer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .time-segment {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+        .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a73e8;
+        }
+        .label {
+            color: #5f6368;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Алматтың қалған уақыты:</h1>
+        <div class="timer">
+            <div class="time-segment">
+                <div id="days" class="number">00</div>
+                <div class="label">Дней</div>
+            </div>
+            <div class="time-segment">
+                <div id="hours" class="number">00</div>
+                <div class="label">Часов</div>
+            </div>
+            <div class="time-segment">
+                <div id="minutes" class="number">00</div>
+                <div class="label">Минут</div>
+            </div>
+            <div class="time-segment">
+                <div id="seconds" class="number">00</div>
+                <div class="label">Секунд</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateTimer() {
+            const targetDate = new Date('2025-02-25T00:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
+
